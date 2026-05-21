@@ -1,0 +1,10 @@
+fastapi # Der Backend-Framework
+uvicorn # Server 
+qdrant-client # um mit Qdrant zu kommunizieren
+sentence-transformers # unser Embedding-Modell
+langchain # orchestriert die Rag-Pipeline
+pymupdf # text aus pdf extrahieren
+python-pptx # text aus Präsentationen extrahieren
+python-docx # Text aus Word-Dokumenten extrahieren
+python-multipart # für Datei-Upload im Frontend
+openai # um die OpenAI-kompatible API aufzurufen
