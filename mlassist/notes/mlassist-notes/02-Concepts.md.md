@@ -53,3 +53,115 @@ A database optimized for storing and searching vectors. Instead of SQL queries, 
 |---|---|---| 
 | Input | Task description only | Task + code + specific question | | Output | Thinking directions, no solution | Targeted hints on the specific problem | | Detection | Automatic (no code detected) | Automatic (code block detected) |
 
+# RAG – Universelle Prinzipien
+
+## Die 7 Schritte – immer gleich
+
+Diese Pipeline ist universell – sie ändert sich nie, egal welches RAG-Projekt.
+
+---
+
+## Was sich ändert
+
+| Komponente | Unser Projekt | Alternativen |
+|---|---|---|
+| Vector DB | Qdrant | ChromaDB, Pinecone, Weaviate |
+| Embedding | MiniLM | OpenAI, Cohere, mpnet |
+| Chunking | RecursiveCharacterTextSplitter | SemanticChunker, FixedSize |
+| LLM | OpenAI-compatible | Mistral, Llama, Claude |
+| Framework | LangChain | LlamaIndex, from scratch |
+
+---
+
+## Die 3 kritischen Entscheidungen
+
+### 1. chunk_size und chunk_overlap
+- Zu groß → zu viele irrelevante Informationen → schlechte Präzision
+- Zu klein → Kontext geht verloren → schlechte Antwort
+- Optimaler Wert hängt immer vom Dokumenttyp ab
+
+### 2. Das Embedding-Modell
+- Muss bei der Ingestion UND bei der Query **dasselbe** sein
+- Modell wechseln → alles neu indexieren
+
+### 3. top_k
+- Zu wenig Chunks → fehlende Information
+- Zu viele Chunks → LLM wird überflutet
+- Standard : 5 Chunks pro Anfrage
+
+---
+
+## Code den du immer wiederverwenden wirst
+
+### Chunking
+```python
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=512,
+    chunk_overlap=64
+)
+chunks = splitter.split_text(text)
+```
+
+### Embedding
+```python
+from sentence_transformers import SentenceTransformer
+
+model = SentenceTransformer("all-MiniLM-L6-v2")
+embeddings = model.encode(chunks)
+```
+
+### Qdrant Point erstellen
+```python
+from qdrant_client import models
+
+point = models.PointStruct(
+    id=i,
+    vector=embedding.tolist(),
+    payload={
+        "content": chunk,
+        "source_title": source_title,
+        "source_type": source_type,
+    }
+)
+```
+
+### In Qdrant speichern
+```python
+client.upsert(
+    collection_name="documents",
+    points=points
+)
+```
+
+---
+
+## Das wichtigste Prinzip
+
+> RAG ist eine klare Trennung zwischen **Gedächtnis** (Qdrant) 
+> und **Intelligenz** (LLM).
+> Qdrant findet – das LLM erklärt.
+> Ohne diese Trennung halluziniert das LLM.
+
+---
+
+## Warum .tolist() ?
+sentence-transformers gibt NumPy Arrays zurück.
+Qdrant erwartet Python Listen.
+.tolist() konvertiert NumPy Array → Python Liste.
+
+## Warum upsert statt insert ?
+upsert = update + insert
+- Point existiert bereits → aktualisieren
+- Point existiert nicht → neu erstellen
+Flexibler als ein einfaches insert.
+
+## Warum zip() ?
+Verbindet chunks und embeddings parallel.
+Chunk 1 gehört zu Embedding 1, Chunk 2 zu Embedding 2 usw.
+Ohne zip() wüssten wir nicht welcher Vektor zu welchem Chunk gehört.
+
+## Warum enumerate() ?
+Fügt einen Zähler i hinzu.
+Dieser Zähler wird als eindeutige ID des Points in Qdrant benutzt.

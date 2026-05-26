@@ -8,3 +8,7 @@ app = FastAPI()
 @app.get("/health")
 def health():
     return {"status": "Ok"}
+
+@app.on_event("startup")
+async def startup():
+    new_collection_creation()

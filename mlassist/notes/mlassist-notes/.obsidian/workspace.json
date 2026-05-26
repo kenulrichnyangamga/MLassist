@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "04-Implementation-Log.md.md",
+                "file": "02-Concepts.md.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04-Implementation-Log.md"
+              "title": "02-Concepts.md"
             }
           }
         ],
@@ -256,11 +256,11 @@
   },
   "active": "dff84e1d7adaa18a",
   "lastOpenFiles": [
+    "04-Implementation-Log.md.md",
     "01-Project-Overview.md.md",
     "03-Architecture.md.md",
     "02-Concepts.md.md",
     "05-Ressources.md.md",
-    "04-Implementation-Log.md.md",
     "00-Index.md.md",
     "Unbenannt 1.md",
     "Willkommen.md"
