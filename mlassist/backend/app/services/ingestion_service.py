@@ -1,7 +1,7 @@
 from qdrant_client import QdrantClient
 from qdrant_client import models
 import fitz 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 from app.services.qdrant_service import get_qdrant_client
 
