@@ -23,14 +23,16 @@ def chunks_toembeddings(chunks):
     embeddings = model.encode(chunks)
     return embeddings
 
+import uuid   # en haut du fichier, avec les autres imports
+
 def save_to_qdrant(chunks, embeddings, source_title, source_type):
     client = get_qdrant_client()
     points = []
-    for i, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
+    for chunk, embedding in zip(chunks, embeddings):
         point = models.PointStruct(
-            id=i,
+            id=str(uuid.uuid4()),
             vector=embedding.tolist(),
-            payload= {
+            payload={
                 "content": chunk,
                 "source_title": source_title,
                 "source_type": source_type,
@@ -41,7 +43,7 @@ def save_to_qdrant(chunks, embeddings, source_title, source_type):
     client.upsert(
         collection_name="documents",
         points=points
-        )
+    )
     
 def ingest_pdf(pdf_path, source_title):
     text = extract_text_from_pdf(pdf_path)
