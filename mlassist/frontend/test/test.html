@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLAssist – Test-Bereich</title>
+  <link rel="stylesheet" href="test.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">ML</div>
+      <div>
+        <h1>MLAssist · Test-Bereich</h1>
+        <p class="subtitle">Dokument temporär testen – nichts wird gespeichert</p>
+      </div>
+    </header>
+
+    <section class="karte">
+      <p class="hinweis">Lade ein Dokument hoch und stelle eine Frage dazu. Das Dokument wird nur für diese Anfrage verwendet und nicht in der Wissensbasis gespeichert.</p>
+
+      <form id="test-form" class="test-form">
+        <label for="datei-feld" class="datei-label" id="datei-label">
+          <span class="datei-icon">📄</span>
+          <span id="datei-text">PDF auswählen</span>
+        </label>
+        <input type="file" id="datei-feld" accept=".pdf,.pptx,.docx" hidden>
+
+        <textarea id="frage-feld" placeholder="Deine Frage zum Dokument..." rows="2" required></textarea>
+
+        <button type="submit" id="senden-btn" disabled>Testen</button>
+      </form>
+    </section>
+
+    <section id="antwort-bereich" class="karte versteckt">
+      <h2>Antwort</h2>
+      <div id="antwort-text" class="antwort-text"></div>
+    </section>
+  </div>
+
+  <script src="test.js"></script>
+</body>
+</html>

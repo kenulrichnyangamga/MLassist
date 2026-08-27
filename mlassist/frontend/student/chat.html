@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLAssist – Lernunterstützung</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">ML</div>
+      <div>
+        <h1>MLAssist</h1>
+        <p class="subtitle">Deine Lernunterstützung für Python &amp; Machine Learning</p>
+      </div>
+    </header>
+
+    <!-- Modus-Auswahl mit Beschreibung -->
+    <div class="modus-auswahl">
+      <button type="button" class="modus-btn aktiv" data-mode="A" id="modus-a">
+        <span class="modus-titel">Modus A · Lösungsansätze</span>
+        <span class="modus-beschreibung">Du stellst eine Frage oder Aufgabe. MLAssist gibt dir Denkanstöße und Hinweise, keine fertige Lösung.</span>
+      </button>
+      <button type="button" class="modus-btn" data-mode="B" id="modus-b">
+        <span class="modus-titel">Modus B · Code-Analyse</span>
+        <span class="modus-beschreibung">Du fügst deinen Code ein. MLAssist hilft dir, das konkrete Problem selbst zu finden.</span>
+      </button>
+    </div>
+
+    <!-- Chat-Fenster -->
+    <main id="chat-fenster" class="chat-fenster">
+      <div class="platzhalter">
+        <div class="platzhalter-icon">💡</div>
+        <p>Stelle eine Frage, um zu beginnen.</p>
+      </div>
+    </main>
+
+    <!-- Eingabebereich -->
+    <form id="frage-form" class="eingabe-bereich">
+      <textarea id="frage-feld" placeholder="Deine Frage..." rows="2" required></textarea>
+
+      <!-- Code-Feld: nur sichtbar in Modus B -->
+      <textarea id="code-feld" class="versteckt" placeholder="Füge hier deinen Code ein..." rows="4"></textarea>
+
+      <button type="submit" id="senden-btn">Senden</button>
+    </form>
+  </div>
+
+  <script src="chat.js"></script>
+</body>
+</html>

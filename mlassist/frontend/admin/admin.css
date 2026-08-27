@@ -1,0 +1,88 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --accent: #059669;
+  --danger: #dc2626;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container { max-width: 820px; margin: 0 auto; padding: 24px; }
+
+header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.logo {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1.1rem;
+}
+header h1 { font-size: 1.5rem; }
+.subtitle { color: var(--muted); font-size: 0.9rem; }
+
+.karte {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; margin-bottom: 20px;
+}
+.karte h2 { font-size: 1.1rem; margin-bottom: 8px; }
+.karte-kopf { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.karte-kopf h2 { margin-bottom: 0; }
+.hinweis { color: var(--muted); font-size: 0.85rem; margin-bottom: 14px; }
+
+.upload-bereich { display: flex; flex-direction: column; gap: 12px; }
+.datei-label {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 28px; border: 2px dashed var(--border); border-radius: 10px;
+  cursor: pointer; color: var(--muted);
+  transition: border-color 0.15s, background 0.15s;
+}
+.datei-label:hover { border-color: var(--primary); background: #f5f3ff; }
+.datei-label.hat-datei { border-color: var(--accent); color: var(--accent); background: #f0fdf4; }
+.datei-icon { font-size: 1.8rem; }
+
+#upload-btn {
+  align-self: flex-start; padding: 11px 24px;
+  background: var(--primary); color: #fff; border: none;
+  border-radius: 10px; cursor: pointer; font-size: 0.95rem; font-weight: 500;
+}
+#upload-btn:hover:not(:disabled) { background: var(--primary-dark); }
+#upload-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+
+.status { margin-top: 12px; font-size: 0.9rem; }
+.status.erfolg { color: var(--accent); }
+.status.fehler { color: var(--danger); }
+.status.laden { color: var(--muted); }
+
+.sekundaer-btn {
+  padding: 7px 14px; background: transparent; color: var(--primary);
+  border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.85rem;
+}
+.sekundaer-btn:hover { border-color: var(--primary); background: #f5f3ff; }
+
+.dokumente-liste { display: flex; flex-direction: column; gap: 8px; }
+.platzhalter { color: var(--muted); text-align: center; padding: 24px; }
+
+.dokument {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px;
+}
+.dokument-info { display: flex; flex-direction: column; gap: 2px; }
+.dokument-titel { font-weight: 500; }
+.dokument-meta { font-size: 0.8rem; color: var(--muted); }
+.loeschen-btn {
+  padding: 6px 12px; background: transparent; color: var(--danger);
+  border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.85rem;
+}
+.loeschen-btn:hover { border-color: var(--danger); background: #fef2f2; }

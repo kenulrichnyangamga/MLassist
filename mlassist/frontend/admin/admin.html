@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLAssist – Verwaltung</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">ML</div>
+      <div>
+        <h1>MLAssist · Verwaltung</h1>
+        <p class="subtitle">Dokumente der Wissensbasis verwalten</p>
+      </div>
+    </header>
+
+    <!-- Upload-Bereich -->
+    <section class="karte">
+      <h2>Dokument hochladen</h2>
+      <p class="hinweis">Unterstützte Formate: PDF, PPTX, DOCX</p>
+      <form id="upload-form" class="upload-bereich">
+        <label for="datei-feld" class="datei-label" id="datei-label">
+          <span class="datei-icon">📄</span>
+          <span id="datei-text">Datei auswählen oder hierher ziehen</span>
+        </label>
+        <input type="file" id="datei-feld" accept=".pdf,.pptx,.docx" hidden>
+        <button type="submit" id="upload-btn" disabled>Hochladen &amp; Indexieren</button>
+      </form>
+      <div id="upload-status" class="status"></div>
+    </section>
+
+    <!-- Dokumentenliste -->
+    <section class="karte">
+      <div class="karte-kopf">
+        <h2>Indexierte Dokumente</h2>
+        <button id="aktualisieren-btn" class="sekundaer-btn">Aktualisieren</button>
+      </div>
+      <div id="dokumente-liste" class="dokumente-liste">
+        <div class="platzhalter">Noch keine Dokumente geladen.</div>
+      </div>
+    </section>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

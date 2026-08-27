@@ -1,0 +1,192 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --accent: #059669;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.logo {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1.1rem;
+}
+header h1 { font-size: 1.5rem; }
+.subtitle { color: var(--muted); font-size: 0.9rem; }
+
+/* Modus-Auswahl */
+.modus-auswahl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.modus-btn {
+  text-align: left;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.modus-btn:hover { border-color: var(--primary); }
+.modus-btn.aktiv {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+}
+.modus-titel { font-weight: 600; font-size: 0.95rem; color: var(--primary-dark); }
+.modus-beschreibung { font-size: 0.8rem; color: var(--muted); }
+
+/* Chat-Fenster */
+.chat-fenster {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.platzhalter {
+  color: var(--muted);
+  text-align: center;
+  margin-top: 60px;
+}
+.platzhalter-icon { font-size: 2rem; margin-bottom: 8px; }
+
+/* Nachrichten */
+.nachricht {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.nachricht .rolle {
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.nachricht.frage { align-items: flex-end; }
+.nachricht.frage .rolle { color: var(--primary); }
+.nachricht.frage .blase {
+  background: var(--primary);
+  color: #fff;
+  border-radius: 14px 14px 2px 14px;
+}
+.nachricht.antwort .rolle { color: var(--accent); }
+.nachricht.antwort .blase {
+  background: #f1f5f9;
+  color: var(--text);
+  border-radius: 14px 14px 14px 2px;
+}
+.blase {
+  padding: 12px 16px;
+  max-width: 85%;
+  white-space: pre-wrap;
+}
+
+/* Quellen */
+.quellen {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  max-width: 85%;
+}
+.quellen strong { color: var(--text); }
+.quellen ul { list-style: none; margin-top: 4px; }
+.quellen li { margin-top: 3px; }
+
+/* Eingabebereich */
+.eingabe-bereich { display: flex; flex-direction: column; gap: 10px; }
+.eingabe-bereich textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+  background: var(--card);
+}
+.eingabe-bereich textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+}
+#code-feld { font-family: "Fira Code", monospace; font-size: 0.85rem; }
+.versteckt { display: none; }
+
+#senden-btn {
+  align-self: flex-end;
+  padding: 11px 28px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+#senden-btn:hover { background: var(--primary-dark); }
+#senden-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+
+/* Ladeanzeige */
+.laden { display: flex; gap: 5px; padding: 12px 16px; }
+.laden span {
+  width: 8px; height: 8px;
+  background: var(--muted);
+  border-radius: 50%;
+  animation: huepfen 1.2s infinite ease-in-out;
+}
+.laden span:nth-child(2) { animation-delay: 0.2s; }
+.laden span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes huepfen {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .modus-auswahl { grid-template-columns: 1fr; }
+}
